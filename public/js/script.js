@@ -19,4 +19,9 @@
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
     });
+    socket.on("notifications", function (msg) {
+        let promise = Notification.requestPermission();
+        const text = `You have new message: ${msg}`;
+        const notification = new Notification("New message", { body: text });
+    });
 })();

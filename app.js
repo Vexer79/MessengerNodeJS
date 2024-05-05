@@ -16,6 +16,7 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("chat message", "New User Connected!");
     socket.on("chat message", (msg) => {
         io.emit("chat message", msg);
+        io.emit("notifications", msg);
     });
 });
 
