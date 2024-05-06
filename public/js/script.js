@@ -1,5 +1,6 @@
 (function () {
     var socket = io();
+    const notificationPermission = Notification.requestPermission();
 
     var messages = document.getElementById("messages");
     var form = document.getElementById("form");
@@ -20,8 +21,8 @@
         window.scrollTo(0, document.body.scrollHeight);
     });
     socket.on("notifications", function (msg) {
-        let promise = Notification.requestPermission();
-        const text = `You have new message: ${msg}`;
-        const notification = new Notification("New message", { body: text });
+        notificationPermission.then(() => {
+            document.hidden && new Notification("You have new message!", { body: msg });
+        });
     });
 })();
