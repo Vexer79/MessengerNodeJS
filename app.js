@@ -18,6 +18,20 @@ io.on("connection", (socket) => {
         io.emit("chat message", msg);
         io.emit("notifications", msg);
     });
+
+    socket.on("call-user", (data) => {
+        socket.to(data.to).emit("call-made", {
+            offer: data.offer,
+            socket: socket.id,
+        });
+    });
+    
+    socket.on("make-answer", (data) => {
+        socket.to(data.to).emit("answer-made", {
+            socket: socket.id,
+            answer: data.answer,
+        });
+    });
 });
 
 server.listen(process.env.PORT, process.env.IP_ADRESS, () => {
