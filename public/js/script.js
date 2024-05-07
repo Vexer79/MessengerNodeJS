@@ -1,6 +1,5 @@
 (function () {
     var socket = io();
-    const { RTCPeerConnection, RTCSessionDescription } = window;
     const notificationPermission = Notification.requestPermission();
 
     var messages = document.getElementById("messages");
@@ -10,7 +9,7 @@
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (input.value) {
-            socket.emit("chat message", input.value);
+            socket.emit("chat message", `(${document.getElementById("username").textContent}) ${input.value}`);
             input.value = "";
         }
     });

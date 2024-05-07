@@ -10,7 +10,10 @@ exports.getLogin = (req, res, next) => {
     } else {
         message = null;
     }
-    res.sendFile(path.join(__dirname, "../private/login.html"));
+    res.render('login', {
+        path: '/login',
+        pageTitle: 'Login'
+      });
 };
 
 exports.getSignup = (req, res, next) => {

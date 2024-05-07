@@ -22,10 +22,13 @@ const store = new MongoDBStore({
     collection: "sessions",
 });
 
+app.set("view engine", "ejs");
+app.set("views", "views");
+
 const authRoutes = require("./routes/auth");
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
     session({
         secret: "my secret",
@@ -51,7 +54,11 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 
 app.get("/", isAuth, (req, res, next) => {
-    res.sendFile(path.join(__dirname, "private/index.html"));
+    res.render("index", {
+        path: "/",
+        pageTitle: "Main",
+        username: req.session.user.username,
+    });
 });
 
 io.on("connection", (socket) => {
