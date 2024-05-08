@@ -4,12 +4,150 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                border: 0;
+            }
+
+            *,
+            *:before,
+            *:after {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            :focus,
+            :active {
+                outline: none;
+            }
+
+            a:focus,
+            a:active {
+                outline: none;
+            }
+
+            nav,
+            footer,
+            header,
+            aside {
+                display: block;
+            }
+
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                line-height: 1;
+                font-size: 14px;
+                -ms-text-size-adjust: 100%;
+                -moz-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            }
+
+            input,
+            button,
+            textarea {
+                font-family: inherit;
+            }
+
+            input::-ms-clear {
+                display: none;
+            }
+
+            button {
+                cursor: pointer;
+            }
+
+            button::-moz-focus-inner {
+                padding: 0;
+                border: 0;
+            }
+
+            a,
+            a:visited {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            ul li {
+                list-style: none;
+            }
+
+            img {
+                vertical-align: top;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-size: inherit;
+                font-weight: 400;
+            }
+
+            .wrapper {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: monospace;
+                font-size: 1.2em;
+            }
+
+            form {
+                padding: 20px 30px;
+                display: flex;
+                flex-direction: column;
+                background-color: lightblue;
+                border-radius: 10px;
+            }
+
+            input {
+                padding: 0.35em;
+                border-radius: 5px;
+                margin: 0.5em 0;
+                width: 200px;
+                font-size: inherit;
+                transition: all 0.25s ease;
+                border: solid 2px white;
+            }
+            input:hover{
+                border: solid 2px #a3a2a2;
+            }
+
+            button {
+                text-align: center;
+                width: 60%;
+                padding: 0.45rem;
+                border-radius: 5px;
+                align-self: center;
+                margin-top: 0.2em;
+                transition: all 0.25s ease;
+                font-size: inherit;
+            }
+
+            button:hover {
+                background-color: #a3b1d8;
+                color: white;
+            }
+        </style>
     </head>
     <body>
-        <form action="login" method="POST">
-            <input type="text" name="username" placeholder="username" />
-            <input type="password" name="password" placeholder="password" />
-            <button type="submit">Login</button>
-        </form>
+        <div class="wrapper">
+            <form action="login" method="POST">
+                <input type="text" name="username" placeholder="username" />
+                <input type="password" name="password" placeholder="password" />
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </body>
 </html>
