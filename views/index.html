@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Socket.IO chat</title>
+        <link rel="stylesheet" href="../public/css/style.css" />
+        <title>Messenger</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="main-user__container">
+                <div class="user__container">
+                    <span class="username__container">Ivan</span>
+                    <span class="notifications"></span>
+                </div>
+                <div class="user__container active">
+                    <span class="username__container">Ivan</span>
+                    <span class="notifications"></span>
+                </div>
+            </div>
+            <div class="main-message__container">
+                <div class="message-header__container"></div>
+                <div class="message-view__container">
+                    <div class="message-from">
+                        <span class="username">Username</span>
+                        <span class="message-text__container">Some message here!</span>
+                    </div>
+                    <div class="message-to">
+                        <span class="message-text__container">Some message here!</span>
+                    </div>
+                </div>
+                <div class="message-input__container">
+                    <input type="text" id="inputField" placeholder="Text here...">
+                    <button id="sendButton">Send</button>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
