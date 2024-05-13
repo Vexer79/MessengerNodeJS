@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Elegram</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="wrapper">
-        <div class="main-user__container">
-            <div class="user-header__container"></div>
-            <div class="user__container">
-                <span class="avatar__container"></span>
-                <span class="username__container">Ivan</span>
-                <span class="notifications"></span>
-            </div>
-            <div class="user__container active">
-                <span class="avatar__container"></span>
-                <span class="username__container">Ivan</span>
-                <span class="notifications"></span>
-            </div>
+      <div class="main-user__container">
+        <div class="user-header__container"></div>
+        <div class="user__container">
+          <span class="avatar__container"></span>
+          <span class="username__container">Ivan</span>
+          <span class="notifications"></span>
         </div>
-        <div class="main-message__container">
-            <div class="message-header__container"></div>
-            <div class="message-place__container">
-                <div class="message-view__container">
-                    <div class="message-from">
-                        <span class="username">Username</span>
-                        <span class="message-text__container">Some message here!</span>
-                    </div>
-                    <div class="message-to">
-                        <span class="message-text__container">Some message here!</span>
-                    </div>
+        <div class="user__container active">
+          <span class="avatar__container"></span>
+          <span class="username__container">Ivan</span>
+          <span class="notifications"></span>
+        </div>
+      </div>
+      <div class="main-message__container">
+        <div class="message-header__container"></div>
+        <div class="message-place__container">
+          <div class="message-view__container">
+            <div class="message__placement">
+              <div class="message-from">
+                <span class="username">Username</span>
+                <span class="message-text__container">Some message here!</span>
+              </div>
+            </div>
+            <div class="message__placement">
+              <div class="message-to">
+                <span class="message__yours">You</span>
+                <span class="message-text__container">Some message here!</span>
+              </div>
+            </div>
+            <div class="message__placement">
+                <div class="message-from">
+                  <span class="username">Username</span>
+                  <span class="message-text__container">Some message here!</span>
                 </div>
-            </div>
-            <div class="message-input__container">
-                <input type="text" id="inputField" placeholder="Message...">
-                <button id="sendButton">Send</button>
-            </div>
+              </div>
+              <div class="message__placement">
+                <div class="message-to">
+                  <span class="message__yours">You</span>
+                  <span class="message-text__container">Some message here!</span>
+                </div>
+              </div>
+          </div>
         </div>
+        <div class="message-input__container">
+          <input type="text" id="inputField" placeholder="Message..." />
+          <button id="sendButton">Send</button>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
