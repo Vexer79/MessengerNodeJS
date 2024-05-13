@@ -3,6 +3,9 @@
     color: white;
     font-family: monospace;
 }
+body{
+    background-color: #0F0F0F;
+}
 .user-header__container,
 .message-header__container{
     height: 50px;
@@ -13,7 +16,7 @@
 }
 .wrapper{
     display: flex;
-    height: 742px;
+    height: 732px;
 }
 .main-user__container{
     min-width: 200px;
@@ -22,6 +25,7 @@
     font-size: 20px;
     padding: 5px;
     border-right: 2px #303030 solid;
+    height: 100%;
 }
 .main-message__container{
     width: 100%;
