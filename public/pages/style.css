@@ -6,6 +6,10 @@
 body{
     background-color: #0F0F0F;
 }
+.wrapper, body{
+    width: 100vw;
+    height: 100vh;
+}
 .user-header__container,
 .message-header__container{
     height: 50px;
@@ -16,7 +20,6 @@ body{
 }
 .wrapper{
     display: flex;
-    height: 732px;
 }
 .main-user__container{
     min-width: 200px;
@@ -25,12 +28,10 @@ body{
     font-size: 20px;
     padding: 5px;
     border-right: 2px #303030 solid;
-    height: 100%;
 }
 .main-message__container{
     width: 100%;
     background-color: #0F0F0F;
-    height: 100%;
 }
 .user__container{
     display: flex;
@@ -104,7 +105,10 @@ span .username{
 }
 .message-input__container{
     padding: 0 25%;
+    position: -webkit-sticky;
+    position: sticky;
     display: flex;
+    bottom: 0;
 }
 #inputField{
     height: 45px;
