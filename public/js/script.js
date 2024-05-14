@@ -18,6 +18,10 @@
         }
     });
 
+    socket.on("disconnect", () => {
+        socket.emit("test", `${document.getElementById("username").textContent}`);
+    });
+
     socket.on("chat message", function (msg) {
         var item = document.createElement("li");
         item.textContent = msg;

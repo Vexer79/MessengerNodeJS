@@ -62,18 +62,24 @@ app.get("/", isAuth, (req, res, next) => {
     });
 });
 
-io.on("connection", (socket) => {    
+io.on("connection", (socket) => {
+    let user = {};
+
     socket.on("chat message", (msg) => {
         io.emit("chat message", msg);
         io.emit("notifications", msg);
     });
 
     socket.on("new user connected", (msg) => {
-        userStore.add(
-            JSON.stringify({
-                username: msg,
-            })
-        );
+        user.username = msg;
+        userStore.add(JSON.stringify(user));
+        const onlineUsers = JSON.stringify(Array.from(userStore));
+        socket.broadcast.emit("new user connection", onlineUsers);
+        socket.emit("new user connection", onlineUsers);
+    });
+
+    socket.on("disconnect", (msg) => {
+        userStore.delete(JSON.stringify(user));
         const onlineUsers = JSON.stringify(Array.from(userStore));
         socket.broadcast.emit("new user connection", onlineUsers);
         socket.emit("new user connection", onlineUsers);
