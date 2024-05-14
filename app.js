@@ -16,6 +16,7 @@ const dbName = process.env.dbName;
 const User = require("./models/user");
 const isAuth = require("./middleware/is-auth");
 const flash = require("connect-flash");
+const userStore = new Set();
 
 const store = new MongoDBStore({
     uri: process.env.MONGO_DB_URL,
@@ -61,11 +62,21 @@ app.get("/", isAuth, (req, res, next) => {
     });
 });
 
-io.on("connection", (socket) => {
-    socket.broadcast.emit("chat message", "New User Connected!");
+io.on("connection", (socket) => {    
     socket.on("chat message", (msg) => {
         io.emit("chat message", msg);
         io.emit("notifications", msg);
+    });
+
+    socket.on("new user connected", (msg) => {
+        userStore.add(
+            JSON.stringify({
+                username: msg,
+            })
+        );
+        const onlineUsers = JSON.stringify(Array.from(userStore));
+        socket.broadcast.emit("new user connection", onlineUsers);
+        socket.emit("new user connection", onlineUsers);
     });
 });
 
