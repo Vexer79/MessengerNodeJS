@@ -6,13 +6,35 @@
         <title><%= pageTitle %></title>
     </head>
     <body>
-        <label for="username">Username:</label>
-        <span id="username" name="username"><%= username %></span>
-        <ul id="messages"></ul>
-        <ul id="messages"></ul>
-        <form id="form" action="">
-            <input id="input" autocomplete="off" /><button>Send</button>
-        </form>
+        <label style="display: none;" for="username">Username:</label>
+        <span id="username" style="display: none;" name="username"><%= username %></span>
+        <div class="wrapper">
+            <div class="main-user__container" id="userContainer">
+                <div class="user__container">
+                    <span class="username__container">Ivan</span>
+                    <span class="notifications"></span>
+                </div>
+                <div class="user__container active">
+                    <span class="username__container">Ivan</span>
+                    <span class="notifications"></span>
+                </div>
+            </div>
+            <div class="main-message__container">
+                <div class="message-header__container"></div>
+                <div class="message-view__container">
+                    <div class="message-from">
+                        <span class="message-text__container">Some message here!</span>
+                    </div>
+                    <div class="message-to">
+                        <span class="message-text__container">Some message here!</span>
+                    </div>
+                </div>
+                <div class="message-input__container">
+                    <input type="text" id="inputField" placeholder="Text here..." />
+                    <button id="sendButton">Send</button>
+                </div>
+            </div>
+        </div>
         <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
         <script src="js/script.js"></script>
     </body>

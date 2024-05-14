@@ -63,13 +63,12 @@
     max-width: 200px;
     min-width: 100px;
     background-color: lightgray;
-    padding: 5px 10px;
     justify-content: center;
     border-radius: 10px;
+    padding: 0 10px;
 }
 
 .message-to{
-    padding: 0 10px;
     align-self: flex-end;
     text-align: right;
     background-color: lightblue;
