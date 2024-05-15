@@ -67,8 +67,8 @@ io.on("connection", (socket) => {
 
     socket.on("chat message", (msg) => {
         console.log(msg);
-        io.emit(msg.to, msg);
-        io.emit("notifications", msg);
+        msg.from != msg.to && io.emit(msg.to, msg);
+        io.emit(`notifications ${msg.to}`, msg);
     });
 
     socket.on("new user connected", (msg) => {

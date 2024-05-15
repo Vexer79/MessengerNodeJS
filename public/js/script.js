@@ -24,9 +24,7 @@
     });
 
     function sendMessage() {
-        console.log(activeUser);
         if (input.value && activeUser) {
-            console.log(activeUser.children);
             const newMessage = {
                 to: activeUser.children[0].textContent,
                 from: usernameContainer.textContent,
@@ -39,22 +37,24 @@
             item.innerHTML = `<span class="message-text__container">${newMessage.text}</span>`;
             messages.appendChild(item);
 
-            const messageStorage = userMessages.get(newMessage.from) || [];
+            const messageStorage = userMessages.get(newMessage.to) || [];
             messageStorage.push(newMessage);
-            userMessages.set(newMessage.from, messageStorage);
+            userMessages.set(newMessage.to, messageStorage);
             input.value = "";
         }
     }
 
     socket.on(document.getElementById("username").textContent, function (message) {
-        const messageStorage = userMessages.get(message.from) || [];
+        console.log(message);
+        const messageStorage = userMessages.get(message.to) || [];
         messageStorage.push(message);
-        userMessages.set(message.from, messageStorage);
-        const item = document.createElement("div");
-        item.classList.add("message-from");
-        item.innerHTML = `<span class="message-text__container">${message.text}</span>`;
-        messages.appendChild(item);
-        console.log(userMessages);
+        userMessages.set(message.to, messageStorage);
+        if (activeUser) {
+            const item = document.createElement("div");
+            item.classList.add("message-from");
+            item.innerHTML = `<span class="message-text__container">${message.text}</span>`;
+            messages.appendChild(item);
+        }
     });
 
     socket.on("new user connection", function (msg) {
@@ -76,12 +76,25 @@
                     user.classList.add("active");
                     activeUser && activeUser.classList.remove("active");
                     activeUser = user;
+                    getAndShowMessages(activeUser.children[0].textContent);
                 }
             });
         }
     });
+    function getAndShowMessages(username) {
+        const currentMessages = userMessages.get(username) || [];
+        messages.innerHTML = "";
+        for (const message of currentMessages) {
+            const item = document.createElement("div");
+            usernameContainer.textContent === message.from
+                ? item.classList.add("message-to")
+                : item.classList.add("message-from");
+            item.innerHTML = `<span class="message-text__container">${message.text}</span>`;
+            messages.appendChild(item);
+        }
+    }
 
-    socket.on("notifications", function (message) {
+    socket.on(`notifications ${usernameContainer.textContent}`, function (message) {
         notificationPermission.then(() => {
             document.hidden &&
                 new Notification(`You have new message from ${message.from}!`, {
