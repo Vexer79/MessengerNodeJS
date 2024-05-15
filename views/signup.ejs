@@ -120,7 +120,7 @@
                 transition: all 0.25s ease;
                 border: solid 2px white;
             }
-            input:hover {
+            input:hover{
                 border: solid 2px #a3a2a2;
             }
 
@@ -139,22 +139,14 @@
                 background-color: #a3b1d8;
                 color: white;
             }
-            .singupLink {
-                display: flex;
-                justify-content: flex-end;
-                padding: 20px 0 0 0;
-            }
         </style>
     </head>
     <body>
         <div class="wrapper">
-            <form action="login" method="POST">
+            <form action="signup" method="POST">
                 <input type="text" name="username" placeholder="username" />
                 <input type="password" name="password" placeholder="password" />
-                <button type="submit">Login</button>
-                <div class="singupLink">
-                    <a href="/signup">Signup</a>
-                </div>
+                <button type="submit">Signup</button>
             </form>
         </div>
     </body>

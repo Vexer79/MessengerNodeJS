@@ -23,7 +23,7 @@ exports.getSignup = (req, res, next) => {
     } else {
         message = null;
     }
-    res.render("auth/signup", {
+    res.render("signup", {
         path: "/signup",
         pageTitle: "Signup",
         errorMessage: message,
@@ -64,22 +64,20 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
-    const email = req.body.email;
+    const username = req.body.username;
     const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
-    User.findOne({ email: email })
+    User.findOne({ username: username })
         .then((userDoc) => {
             if (userDoc) {
                 req.flash("error", "E-Mail exists already, please pick a different one.");
-                return res.redirect("/signup");
+                return res.redirect("/login");
             }
             return bcrypt
                 .hash(password, 12)
                 .then((hashedPassword) => {
                     const user = new User({
-                        email: email,
-                        password: hashedPassword,
-                        cart: { items: [] },
+                        username: username,
+                        password: hashedPassword
                     });
                     return user.save();
                 })
