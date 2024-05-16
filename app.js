@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
 mongoose
     .connect(process.env.MONGO_DB_URL, { dbName })
     .then(() => {
-        server.listen(process.env.PORT, process.env.IP_ADRESS);
+        server.listen(process.env.PORT);
     })
     .catch((err) => {
         console.log(err);
