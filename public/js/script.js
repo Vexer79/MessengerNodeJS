@@ -66,13 +66,16 @@
         let html = "";
         JSON.parse(msg).forEach((userJSON) => {
             const user = JSON.parse(userJSON);
-            html += createUserContainer(
-                user.username,
+            html +=
                 user.username === activeUser?.children[1].textContent
-            );
+                    ? ""
+                    : createUserContainer(user.username);
         });
         userContainer.innerHTML = html;
-        activeUser && activeUser.classList.add("active");
+        if(activeUser){
+            userContainer.appendChild(activeUser);
+            activeUser.classList.add("active");
+        }
         for (let user of userContainer.children) {
             user.addEventListener("click", function () {
                 if (user != activeUser) {
@@ -85,9 +88,9 @@
         }
     });
 
-    function createUserContainer(username, isActive = false) {
+    function createUserContainer(username) {
         return `
-                <div class="user__container ${isActive ? "active" : ""}">
+                <div class="user__container">
                     <span class="avatar__container"></span>
                     <span class="username__container">${username}</span>
                     <span class="notifications"></span>
