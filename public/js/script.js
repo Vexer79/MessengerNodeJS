@@ -10,6 +10,7 @@
     const input = document.getElementById("inputField");
 
     let activeUser = document.querySelector(".active");
+    const parentMessageContainer = document.querySelector(".message-place__container");
 
     sendButton.addEventListener("click", function (event) {
         sendMessage();
@@ -36,6 +37,7 @@
             saveMessage(newMessage, newMessage.to);
             input.value = "";
         }
+        parentMessageContainer.scroll(0, parentMessageContainer.scrollHeight);
     }
 
     function createMessage(text, sender = "to") {
@@ -59,6 +61,7 @@
         saveMessage(message, message.from);
         if (activeUser?.children[1].textContent === message.from) {
             messageContainer.appendChild(createMessage(message.text, "from"));
+            parentMessageContainer.scroll(0, parentMessageContainer.scrollHeight);
         }
     });
 
@@ -78,11 +81,12 @@
         }
         for (let user of userContainer.children) {
             user.addEventListener("click", function () {
-                if(user != activeUser){
+                if (user != activeUser) {
                     user.classList.add("active");
                     activeUser && activeUser.classList.remove("active");
                     activeUser = user;
                     getAndShowMessages(activeUser.children[1].textContent);
+                    parentMessageContainer.scroll(0, parentMessageContainer.scrollHeight);
                 }
             });
         }

@@ -77,9 +77,9 @@ body {
 }
 .message-place__container {
     padding: 0 25%;
-    height: calc(100% - 115px);
     align-items: end;
-    overflow-x: auto;
+    overflow-y: auto;
+    height: calc(100% - 115px);
 }
 .message__yours {
     text-align: end;
