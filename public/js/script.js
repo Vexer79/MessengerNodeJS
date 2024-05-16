@@ -31,14 +31,24 @@
                 text: input.value,
             };
             socket.emit("chat message", newMessage);
-
-            const item = document.createElement("div");
-            item.classList.add("message-to");
-            item.innerHTML = `<span class="message-text__container">${newMessage.text}</span>`;
+            
             messageContainer.appendChild(createMessage(newMessage.text));
             saveMessage(newMessage, newMessage.to);
             input.value = "";
         }
+    }
+
+    function createMessage(text, sender = "to") {
+        const item = document.createElement("div");
+        item.classList.add(`message-${sender}`);
+        item.innerHTML = `<span class="message-text__container">${text}</span>`;
+        return item;
+    }
+
+    function saveMessage(message, sender) {
+        const messageStorage = userMessages.get(sender) || [];
+        messageStorage.push(message);
+        userMessages.set(sender, messageStorage);
     }
 
     socket.on("connect", () => {
@@ -71,6 +81,15 @@
             });
         }
     });
+
+    function createUserContainer(username) {
+        return `
+                <div class="user__container">
+                    <span class="username__container">${username}</span>
+                    <span class="notifications"></span>
+                </div>
+            `;
+    }
 
     function getAndShowMessages(username) {
         const currentMessages = userMessages.get(username) || [];
