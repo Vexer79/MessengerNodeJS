@@ -57,7 +57,7 @@
 
     socket.on(usernameContainer.textContent, function (message) {
         saveMessage(message, message.from);
-        if (activeUser.children[1].textContent === message.from) {
+        if (activeUser?.children[1].textContent === message.from) {
             messageContainer.appendChild(createMessage(message.text, "from"));
         }
     });
@@ -72,13 +72,13 @@
                     : createUserContainer(user.username);
         });
         userContainer.innerHTML = html;
-        if(activeUser){
+        if (activeUser) {
             userContainer.appendChild(activeUser);
             activeUser.classList.add("active");
         }
         for (let user of userContainer.children) {
             user.addEventListener("click", function () {
-                if (user != activeUser) {
+                if(user != activeUser){
                     user.classList.add("active");
                     activeUser && activeUser.classList.remove("active");
                     activeUser = user;
@@ -103,12 +103,6 @@
         messageContainer.innerHTML = "";
         messageContainer.innerHTML = "";
         for (const message of currentMessages) {
-            messageContainer.appendChild(
-                createMessage(
-                    message.text,
-                    usernameContainer.textContent === message.from ? "to" : "from"
-                )
-            );
             messageContainer.appendChild(
                 createMessage(
                     message.text,
