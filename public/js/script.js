@@ -101,7 +101,14 @@
     function getAndShowMessages(username) {
         const currentMessages = userMessages.get(username) || [];
         messageContainer.innerHTML = "";
+        messageContainer.innerHTML = "";
         for (const message of currentMessages) {
+            messageContainer.appendChild(
+                createMessage(
+                    message.text,
+                    usernameContainer.textContent === message.from ? "to" : "from"
+                )
+            );
             messageContainer.appendChild(
                 createMessage(
                     message.text,
