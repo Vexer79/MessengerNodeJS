@@ -88,6 +88,11 @@ body{
     display: flex;
     justify-content: end;
 }
+.message-from,
+.message-to{
+    min-width: 20px;
+    min-height: 20px;
+}
 .message-from{
     display: flex;
     flex-direction: column;
