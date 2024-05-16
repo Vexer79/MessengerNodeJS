@@ -26,12 +26,12 @@
     function sendMessage() {
         if (input.value && activeUser) {
             const newMessage = {
-                to: activeUser.children[0].textContent,
+                to: activeUser.children[1].textContent,
                 from: usernameContainer.textContent,
                 text: input.value,
             };
             socket.emit("chat message", newMessage);
-            
+
             messageContainer.appendChild(createMessage(newMessage.text));
             saveMessage(newMessage, newMessage.to);
             input.value = "";
@@ -57,7 +57,7 @@
 
     socket.on(usernameContainer.textContent, function (message) {
         saveMessage(message, message.from);
-        if (activeUser.children[0].textContent === message.from) {
+        if (activeUser.children[1].textContent === message.from) {
             messageContainer.appendChild(createMessage(message.text, "from"));
         }
     });
@@ -66,7 +66,10 @@
         let html = "";
         JSON.parse(msg).forEach((userJSON) => {
             const user = JSON.parse(userJSON);
-            html += createUserContainer(user.username);
+            html += createUserContainer(
+                user.username,
+                user.username === activeUser?.children[1].textContent
+            );
         });
         userContainer.innerHTML = html;
         activeUser && activeUser.classList.add("active");
@@ -76,15 +79,16 @@
                     user.classList.add("active");
                     activeUser && activeUser.classList.remove("active");
                     activeUser = user;
-                    getAndShowMessages(activeUser.children[0].textContent);
+                    getAndShowMessages(activeUser.children[1].textContent);
                 }
             });
         }
     });
 
-    function createUserContainer(username) {
+    function createUserContainer(username, isActive = false) {
         return `
-                <div class="user__container">
+                <div class="user__container ${isActive ? "active" : ""}">
+                    <span class="avatar__container"></span>
                     <span class="username__container">${username}</span>
                     <span class="notifications"></span>
                 </div>
