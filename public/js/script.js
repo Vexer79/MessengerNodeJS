@@ -1,11 +1,11 @@
 (function () {
-    var socket = io();
+    const socket = io();
     const notificationPermission = Notification.requestPermission();
-    const usernameContainer = document.getElementById("username");
-    socket.emit("new user connected", `${usernameContainer.textContent}`);
     const userMessages = new Map();
 
-    const messages = document.getElementById("messages");
+    const usernameContainer = document.getElementById("username");
+    const messageContainer = document.getElementById("messages");
+    const userContainer = document.getElementById("userContainer");
     const sendButton = document.getElementById("sendButton");
     const input = document.getElementById("inputField");
 
@@ -35,42 +35,32 @@
             const item = document.createElement("div");
             item.classList.add("message-to");
             item.innerHTML = `<span class="message-text__container">${newMessage.text}</span>`;
-            messages.appendChild(item);
-
-            const messageStorage = userMessages.get(newMessage.to) || [];
-            messageStorage.push(newMessage);
-            userMessages.set(newMessage.to, messageStorage);
+            messageContainer.appendChild(createMessage(newMessage.text));
+            saveMessage(newMessage, newMessage.to);
             input.value = "";
         }
     }
 
-    socket.on(document.getElementById("username").textContent, function (message) {
-        console.log(message);
-        const messageStorage = userMessages.get(message.to) || [];
-        messageStorage.push(message);
-        userMessages.set(message.to, messageStorage);
-        if (activeUser) {
-            const item = document.createElement("div");
-            item.classList.add("message-from");
-            item.innerHTML = `<span class="message-text__container">${message.text}</span>`;
-            messages.appendChild(item);
+    socket.on("connect", () => {
+        socket.emit("new user connected", `${usernameContainer.textContent}`);
+    });
+
+    socket.on(usernameContainer.textContent, function (message) {
+        saveMessage(message, message.from);
+        if (activeUser.children[0].textContent === message.from) {
+            messageContainer.appendChild(createMessage(message.text, "from"));
         }
     });
 
     socket.on("new user connection", function (msg) {
         let html = "";
-        JSON.parse(msg).forEach((element) => {
-            const user = JSON.parse(element);
-            html += `
-                <div class="user__container">
-                    <span class="username__container">${user.username}</span>
-                    <span class="notifications"></span>
-                </div>
-            `;
+        JSON.parse(msg).forEach((userJSON) => {
+            const user = JSON.parse(userJSON);
+            html += createUserContainer(user.username);
         });
-        document.getElementById("userContainer").innerHTML = html;
+        userContainer.innerHTML = html;
         activeUser && activeUser.classList.add("active");
-        for (let user of document.getElementById("userContainer").children) {
+        for (let user of userContainer.children) {
             user.addEventListener("click", function () {
                 if (user != activeUser) {
                     user.classList.add("active");
@@ -81,16 +71,17 @@
             });
         }
     });
+
     function getAndShowMessages(username) {
         const currentMessages = userMessages.get(username) || [];
-        messages.innerHTML = "";
+        messageContainer.innerHTML = "";
         for (const message of currentMessages) {
-            const item = document.createElement("div");
-            usernameContainer.textContent === message.from
-                ? item.classList.add("message-to")
-                : item.classList.add("message-from");
-            item.innerHTML = `<span class="message-text__container">${message.text}</span>`;
-            messages.appendChild(item);
+            messageContainer.appendChild(
+                createMessage(
+                    message.text,
+                    usernameContainer.textContent === message.from ? "to" : "from"
+                )
+            );
         }
     }
 
