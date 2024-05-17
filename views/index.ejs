@@ -11,7 +11,9 @@
         <div class="wrapper">
             <div class="main-user__container" id="userContainer"></div>
             <div class="main-message__container">
-                <div class="message-header__container"></div>
+                <div class="message-header__container">
+                    <button id="openMenuButton"><-</button>
+                </div>
                 <div class="message-place__container">
                     <div class="message-view__container" id="messages"></div>
                 </div>
@@ -22,6 +24,6 @@
             </div>
         </div>
         <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-        <script src="js/script.js"></script>
+        <script type="module" src="js/script.js"></script>
     </body>
 </html>

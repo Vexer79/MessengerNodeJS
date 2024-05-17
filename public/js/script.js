@@ -1,3 +1,4 @@
+import "./mobile.js";
 (function () {
     const socket = io();
     const notificationPermission = Notification.requestPermission();
