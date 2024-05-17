@@ -10,10 +10,10 @@ exports.getLogin = (req, res, next) => {
     } else {
         message = null;
     }
-    res.render('login', {
-        path: '/login',
-        pageTitle: 'Login'
-      });
+    res.render("login", {
+        path: "/login",
+        pageTitle: "Login",
+    });
 };
 
 exports.getSignup = (req, res, next) => {
@@ -26,7 +26,6 @@ exports.getSignup = (req, res, next) => {
     res.render("signup", {
         path: "/signup",
         pageTitle: "Signup",
-        errorMessage: message,
     });
 };
 
@@ -37,8 +36,10 @@ exports.postLogin = (req, res, next) => {
         .then((user) => {
             if (!user) {
                 req.flash("error", "Invalid username or password.");
-                console.log("error");
-                return res.redirect("/login");
+                return res.render("signup", {
+                    path: "/signup",
+                    pageTitle: "Signup",
+                });
             }
             bcrypt
                 .compare(password, user.password)
@@ -53,7 +54,10 @@ exports.postLogin = (req, res, next) => {
                     }
                     console.log("error");
                     req.flash("error", "Invalid username or password.");
-                    res.redirect("/login");
+                    res.render("login", {
+                        path: "/login",
+                        pageTitle: "Login",
+                    });
                 })
                 .catch((err) => {
                     console.log(err);
@@ -77,12 +81,17 @@ exports.postSignup = (req, res, next) => {
                 .then((hashedPassword) => {
                     const user = new User({
                         username: username,
-                        password: hashedPassword
+                        password: hashedPassword,
                     });
                     return user.save();
                 })
-                .then((result) => {
-                    res.redirect("/login");
+                .then((user) => {
+                    req.session.isLoggedIn = true;
+                    req.session.user = user;
+                    return req.session.save((err) => {
+                        console.log(err);
+                        res.redirect("/");
+                    });
                 });
         })
         .catch((err) => {
