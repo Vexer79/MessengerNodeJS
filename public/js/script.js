@@ -102,7 +102,7 @@ import "./mobile.js";
                         <span class="avatar__container"></span>
                         <span class="username__container">${user.children[1].textContent}</span>`;
                     }
-                    activeUser.children[1].classList.remove("active");
+                    activeUser.children[2].classList.remove("active");
                     global.innerWidth < 601 &&
                         setTimeout(() => {
                             userContainer.style.left = "-100%";
