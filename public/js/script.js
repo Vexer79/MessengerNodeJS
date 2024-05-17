@@ -64,6 +64,15 @@ import "./mobile.js";
             if (activeUser?.children[1].textContent === message.from) {
                 messageContainer.appendChild(createMessage(message.text, "from"));
                 parentMessageContainer.scroll(0, parentMessageContainer.scrollHeight);
+            } else {
+                for (const child of userContainer.children) {
+                    if (
+                        child.children[1].textContent === message.from &&
+                        !child.children[2].classList.contains("active")
+                    ) {
+                        child.children[2].classList.add("active");
+                    }
+                }
             }
         });
 
@@ -93,6 +102,7 @@ import "./mobile.js";
                         <span class="avatar__container"></span>
                         <span class="username__container">${user.children[1].textContent}</span>`;
                     }
+                    activeUser.children[1].classList.remove("active");
                     global.innerWidth < 601 &&
                         setTimeout(() => {
                             userContainer.style.left = "-100%";
