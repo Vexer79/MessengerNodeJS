@@ -107,8 +107,8 @@ body {
     flex-direction: column;
     background-color: #212121;
     width: max-content;
-    padding: 1%;
-    font-size: 15px;
+    padding: 5px;
+    font-size: 17px;
     border-radius: 5px;
     margin-top: 10px;
 }
@@ -122,8 +122,8 @@ body {
     align-items: end;
     background-color: #766ac8;
     width: max-content;
-    padding: 1%;
-    font-size: 15px;
+    padding: 5px;
+    font-size: 17px;
     border-radius: 5px;
     margin-top: 10px;
 }
