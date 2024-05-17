@@ -126,3 +126,32 @@ import "./mobile.js";
         });
     });
 })();
+
+let touchstartX = 0;
+let touchendX = 0;
+let touchstartY = 0;
+let touchendY = 0;
+
+function checkDirection() {
+  const deltaX = touchendX - touchstartX;
+  const deltaY = touchendY - touchstartY;
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 0) {
+      userContainer.style.left = '0px';
+    } else {
+      userContainer.style.left = '-650px';
+    }
+  }
+}
+
+document.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX;
+  touchstartY = e.changedTouches[0].screenY;
+});
+
+document.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX;
+  touchendY = e.changedTouches[0].screenY;
+  checkDirection();
+});
