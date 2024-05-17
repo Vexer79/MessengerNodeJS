@@ -22,7 +22,6 @@
                 menu.style.left = "0px";
             } else {
                 menu.style.left = "-650px";
-                input.focus();
             }
         }
     }
