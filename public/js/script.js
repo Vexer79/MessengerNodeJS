@@ -2,7 +2,7 @@ import "./mobile.js";
 (function () {
     try {
         const socket = io();
-        const notificationPermission = Notification.requestPermission();
+        // const notificationPermission = Notification.requestPermission();
         const userMessages = new Map();
 
         const usernameContainer = document.getElementById("username");
@@ -118,14 +118,14 @@ import "./mobile.js";
             }
         }
 
-        socket.on(`notifications ${usernameContainer.textContent}`, function (message) {
-            notificationPermission.then(() => {
-                document.hidden &&
-                    new Notification(`You have new message from ${message.from}!`, {
-                        body: message.text,
-                    });
-            });
-        });
+        // socket.on(`notifications ${usernameContainer.textContent}`, function (message) {
+        //     notificationPermission.then(() => {
+        //         document.hidden &&
+        //             new Notification(`You have new message from ${message.from}!`, {
+        //                 body: message.text,
+        //             });
+        //     });
+        // });
         socket.on("connect_error", (err) => {
             alert(`msg: ${err.message}
         desc: ${err.description}
