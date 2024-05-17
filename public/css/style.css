@@ -166,9 +166,6 @@ span .username {
     background-color: orange;
 }
 
-.notifications .active {
-}
-
 #activeUserContainer {
     padding-left: 15px;
     display: flex;
@@ -208,7 +205,7 @@ span .username {
         z-index: 10;
         left: 0px;
         transition: 0.5s;
-        overflow: hidden;
+        overflow-x: auto;
     }
     .user__container {
         justify-content: start;
