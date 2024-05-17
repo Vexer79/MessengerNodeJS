@@ -76,7 +76,7 @@ exports.postSignup = (req, res, next) => {
                 req.flash("error", "E-Mail exists already, please pick a different one.");
                 return res.redirect("/login");
             }
-            return bcrypt
+            return password.length !== 0 ? bcrypt
                 .hash(password, 12)
                 .then((hashedPassword) => {
                     const user = new User({
@@ -92,7 +92,7 @@ exports.postSignup = (req, res, next) => {
                         console.log(err);
                         res.redirect("/");
                     });
-                });
+                }) : res.redirect("/signup");
         })
         .catch((err) => {
             console.log(err);
