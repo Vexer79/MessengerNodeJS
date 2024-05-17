@@ -33,7 +33,6 @@ body{
     display: flex;
 }
 .main-user__container {
-    height: 100%;
     width: 300px;
     background: #212121;
     font-size: 20px;
@@ -177,4 +176,9 @@ span .username {
     .message-input__container{
         padding: 0 10px;
     }
+    .wrapper,
+body {
+    width: 100vw;
+    height: calc(100vh - 55px); /* 55px = адресна строка телефона*/
+}
 }
