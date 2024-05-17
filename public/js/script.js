@@ -1,8 +1,7 @@
 import "./mobile.js";
-(function () {
+(function (global) {
     try {
         const socket = io();
-        // const notificationPermission = Notification.requestPermission();
         const userMessages = new Map();
 
         const usernameContainer = document.getElementById("username");
@@ -10,6 +9,7 @@ import "./mobile.js";
         const userContainer = document.getElementById("userContainer");
         const sendButton = document.getElementById("sendButton");
         const input = document.getElementById("inputField");
+        const activeUserContainer = document.getElementById("activeUserContainer");
 
         let activeUser = document.querySelector(".active");
         const parentMessageContainer = document.querySelector(".message-place__container");
@@ -89,7 +89,14 @@ import "./mobile.js";
                         activeUser = user;
                         getAndShowMessages(activeUser.children[1].textContent);
                         parentMessageContainer.scroll(0, parentMessageContainer.scrollHeight);
+                        activeUserContainer.innerHTML = `
+                        <span class="avatar__container"></span>
+                        <span class="username__container">${user.children[1].textContent}</span>`;
                     }
+                    global.innerWidth < 601 &&
+                        setTimeout(() => {
+                            userContainer.style.left = "-100%";
+                        }, 100);
                 });
             }
         });
@@ -118,19 +125,16 @@ import "./mobile.js";
             }
         }
 
-        // socket.on(`notifications ${usernameContainer.textContent}`, function (message) {
-        //     notificationPermission.then(() => {
-        //         document.hidden &&
-        //             new Notification(`You have new message from ${message.from}!`, {
-        //                 body: message.text,
-        //             });
-        //     });
-        // });
+        socket.on(`notifications ${usernameContainer.textContent}`, function (message) {
+            console.log(message);
+        });
+
         socket.on("connect_error", (err) => {
             alert(`msg: ${err.message}
         desc: ${err.description}
         context: ${err.context}`);
         });
+
         socket.on("connect_failed", (err) => {
             alert(`msg: ${err.message}
         desc: ${err.description}
@@ -139,4 +143,4 @@ import "./mobile.js";
     } catch (err) {
         alert(err.message);
     }
-})();
+})(window);

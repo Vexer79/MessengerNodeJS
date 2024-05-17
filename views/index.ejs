@@ -2,7 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+        />
         <title>Elegram</title>
         <link rel="stylesheet" href="css/style.css" />
     </head>
@@ -12,7 +15,8 @@
             <div class="main-user__container" id="userContainer"></div>
             <div class="main-message__container">
                 <div class="message-header__container">
-                    <button id="openMenuButton"><-</button>
+                    <button id="openMenuButton"></button>
+                    <div id="activeUserContainer"></div>
                 </div>
                 <div class="message-place__container">
                     <div class="message-view__container" id="messages"></div>
