@@ -125,4 +125,9 @@ import "./mobile.js";
                 });
         });
     });
+    socket.on("connect_error", (err) => {
+        alert(`msg: ${err.message}
+        desc: ${err.description}
+        context: ${err.context}`);
+    });
 })();
