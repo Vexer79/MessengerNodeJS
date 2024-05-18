@@ -83,6 +83,9 @@ body {
     display: flex;
     flex-direction: column;
 }
+.message-view__container > div:first-child {
+    margin-top: auto;
+}
 .message-place__container {
     padding: 0 25%;
     align-items: end;
