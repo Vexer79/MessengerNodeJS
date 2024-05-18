@@ -54,7 +54,7 @@ body{
     height: 50px;
     width: 50px;
     background-image: url('avatar.jpg');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .user__container:hover{
