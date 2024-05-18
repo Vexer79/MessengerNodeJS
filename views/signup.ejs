@@ -101,14 +101,16 @@
                 align-items: center;
                 font-family: monospace;
                 font-size: 1.2em;
+                background-color: black;
             }
 
             form {
                 padding: 20px 30px;
                 display: flex;
                 flex-direction: column;
-                background-color: lightblue;
+                background-color: #212121;
                 border-radius: 10px;
+                border-right: 2px #303030 solid;
             }
 
             input {
@@ -134,10 +136,14 @@
                 transition: all 0.25s ease;
                 font-size: inherit;
             }
-
             button:hover {
-                background-color: #a3b1d8;
+                background-color: rgb(109, 106, 106);
                 color: white;
+            }
+            .loginupLink {
+                display: flex;
+                justify-content: flex-end;
+                padding: 20px 0 0 0;
             }
         </style>
     </head>
@@ -147,6 +153,9 @@
                 <input type="text" name="username" placeholder="username" />
                 <input type="password" name="password" placeholder="password" />
                 <button type="submit">Signup</button>
+                <div class="loginupLink">
+                    <a href="/login">Sign in</a>
+                </div>
             </form>
         </div>
     </body>

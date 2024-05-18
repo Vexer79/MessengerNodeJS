@@ -1,11 +1,13 @@
 (() => {
     const button = document.getElementById("openMenuButton");
     const menu = document.getElementById("userContainer");
-    button &&
         button.addEventListener("click", (event) => {
-            menu && menu.classList.toggle("_active");
+            if (menu.style.left === "0px") {
+                menu.style.left = "-650px";
+            } else {
+                menu.style.left = "0px";
+            }
         });
-
     const input = document.getElementById("inputField");
 
     let touchstartX = 0;
@@ -22,7 +24,6 @@
                 menu.style.left = "0px";
             } else {
                 menu.style.left = "-650px";
-                input.focus();
             }
         }
     }
