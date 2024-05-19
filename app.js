@@ -11,16 +11,17 @@ const io = new Server(server);
 
 const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoDBStore = require("connect-mongodb-session")(session);
+const MongoStore = require("connect-mongo");
 const dbName = process.env.dbName;
 const User = require("./models/user");
 const isAuth = require("./middleware/is-auth");
 const flash = require("connect-flash");
 const userStore = new Set();
 
-const store = new MongoDBStore({
-    uri: process.env.MONGO_DB_URL,
-    collection: "sessions",
+const store = MongoStore.create({
+    mongoUrl: process.env.MONGO_DB_URL,
+    dbName: "Messenger",
+    collectionName: "sessions",
 });
 
 app.set("view engine", "ejs");
