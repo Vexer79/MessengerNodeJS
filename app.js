@@ -20,7 +20,7 @@ const userStore = new Set();
 
 const store = MongoStore.create({
     mongoUrl: process.env.MONGO_DB_URL,
-    dbName: "Messenger",
+    dbName,
     collectionName: "sessions",
 });
 
